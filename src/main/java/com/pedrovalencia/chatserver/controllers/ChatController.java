@@ -1,10 +1,10 @@
 package com.pedrovalencia.chatserver.controllers;
 
+import com.pedrovalencia.chatserver.domain.Message;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by pedrovalencia on 02/04/15.
@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class ChatController {
 
-    @RequestMapping("/hello")
+    @RequestMapping(value="/chat/send", method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String home() {
-        return "Hello World!";
+    public String sendMessage(@RequestBody Message message) {
+
+
+        return message.getMessage() + message.getTimestamp();
     }
 
     public static void main(String[] args) throws Exception {
