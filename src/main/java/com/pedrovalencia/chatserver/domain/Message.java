@@ -11,21 +11,18 @@ import org.springframework.stereotype.Component;
 public class Message {
 
     @Id
-    private String id;
-
-    private long timestamp;
+    private String timestamp;
     private String message;
 
     public Message() {
-
     }
 
-    public Message(long timestamp, String message) {
+    public Message(String timestamp, String message) {
         this.timestamp = timestamp;
         this.message = message;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -33,7 +30,7 @@ public class Message {
         this.message = message;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
