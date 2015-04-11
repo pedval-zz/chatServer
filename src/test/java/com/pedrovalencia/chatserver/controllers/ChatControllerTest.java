@@ -52,12 +52,35 @@ public class ChatControllerTest {
     }
 
     @Test
-    public void getHello() throws Exception {
+    public void getTest() throws Exception {
 
         when(repository.findOne("1428094981415")).thenReturn(new Message("1428094981415", "Message 4"));
 
         mvc.perform(MockMvcRequestBuilders.get("/chat/1428094981415").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("{\"timestamp\":\"1428094981415\",\"message\":\"Message 4\"}")));
+    }
+
+    @Test
+    public void postTest() throws Exception {
+        String newMessage = "{\"timestamp\":\"1428094981715\",\"message\":\"Message 5\"}";
+        mvc.perform(MockMvcRequestBuilders.post("/chat").contentType(MediaType.APPLICATION_JSON).content(newMessage))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("{\"code\":\"0000\",\"description\":\"Message created\"}")));
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/chat/1428094981415").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("{\"code\":\"0001\",\"description\":\"Message deleted\"}")));
+    }
+
+    @Test
+    public void updateTest() throws Exception {
+        String newMessage = "{\"timestamp\":\"1423094981715\",\"message\":\"Message 6\"}";
+        mvc.perform(MockMvcRequestBuilders.put("/chat/1423094981715").contentType(MediaType.APPLICATION_JSON).content(newMessage))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("{\"code\":\"0002\",\"description\":\"Message updated\"}")));
     }
 }
