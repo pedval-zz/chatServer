@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @EnableMongoRepositories("com.pedrovalencia.chatserver.repositories")
 public class ChatController {
 
-    @Autowired
     ChatRepository repository;
 
     @RequestMapping(method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -53,5 +52,10 @@ public class ChatController {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ChatController.class, args);
+    }
+
+    @Autowired
+    public void setChatRepository(ChatRepository repository){
+        this.repository = repository;
     }
 }
